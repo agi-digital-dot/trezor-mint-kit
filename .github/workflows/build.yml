@@ -1,0 +1,47 @@
+name: Build Trezor-capable spl-token
+
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout kit
+        uses: actions/checkout@v4
+
+      - name: Install Rust 1.93.0
+        uses: dtolnay/rust-toolchain@1.93.0
+
+      - name: Cache cargo
+        uses: actions/cache@v4
+        with:
+          path: |
+            ~/.cargo/registry
+            ~/.cargo/git
+            ~/token-2022-src/target
+          key: spl-token-${{ runner.os }}-${{ hashFiles('patches/SHA256SUMS') }}
+          restore-keys: spl-token-${{ runner.os }}-
+
+      - name: Build (the same script from TUTORIAL.md)
+        run: |
+          chmod +x build.sh
+          export CI=1
+          # build.sh installs to ~/.cargo/bin and swaps the solana-install symlink;
+          # in CI there is no solana install dir, so pre-create the target path it checks
+          ./build.sh
+
+      - name: Verify Trezor capability (the gate that matters)
+        run: |
+          COUNT=$(strings ~/.cargo/bin/spl-token | grep -c -i trezor || true)
+          echo "Trezor symbols: $COUNT"
+          [ "$COUNT" -gt 0 ] || { echo "FAIL: binary built without Trezor support"; exit 1; }
+
+      - name: Upload binary
+        uses: actions/upload-artifact@v4
+        with:
+          name: spl-token-trezor-linux-x86_64
+          path: ~/.cargo/bin/spl-token
+          retention-days: 90
