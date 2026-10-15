@@ -87,7 +87,8 @@ spl-token authorize <MINT> freeze --disable
 spl-token initialize-metadata 3e2PYneVBXTyemNiSQ5VVkuYM4bYNPxLqvWkKjA5zXAM "TDI" "TDI" https://srv1537297.hstgr.cloud/tdi/token.json
 
 # C2. Mint the full supply to your Trezor address
-spl-token mint 3e2PYneVBXTyemNiSQ5VVkuYM4bYNPxLqvWkKjA5zXAM 333333 --recipient DbJ5opgLXjpHkB4STqiJqJMvnVfhE8Pas4aKymzZPe7W
+#     (CLI 5.6.1: the flag is --recipient-owner, and it comes BEFORE the mint address)
+spl-token mint --recipient-owner DbJ5opgLXjpHkB4STqiJqJMvnVfhE8Pas4aKymzZPe7W 3e2PYneVBXTyemNiSQ5VVkuYM4bYNPxLqvWkKjA5zXAM 333333
 
 # C3. Prove it (read-only, no signature)
 spl-token supply 3e2PYneVBXTyemNiSQ5VVkuYM4bYNPxLqvWkKjA5zXAM
