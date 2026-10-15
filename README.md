@@ -1,7 +1,11 @@
 # TREZOR MINT KIT — hardware-born Solana tokens
 
 **The first documented, mainnet-proven way to create a Solana Token-2022 token signed entirely by a Trezor.**
-First token born on hardware via this protocol: Oct 15 2026 — mint `3e2PYneVBXTyemNiSQ5VVkuYM4bYNPxLqvWkKjA5zXAM` (Solscan-verifiable).
+First token born via this protocol: Oct 15 2026 — mint `3e2PYneVBXTyemNiSQ5VVkuYM4bYNPxLqvWkKjA5zXAM` (Solscan-verifiable).
+
+> **Claim scope (honest):** "first documented Trezor-signed creation" — NOT "first hardware-born
+> token ever" (Ledger-signed creations long predate this). Full basis + citations:
+> [tdi-true-digital/CLAIM-BASIS.md](https://github.com/agi-digital-dot/tdi-true-digital/blob/main/CLAIM-BASIS.md).
 
 ## Why this kit exists
 
