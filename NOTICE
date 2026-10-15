@@ -1,0 +1,23 @@
+NOTICE — trezor-mint-kit
+
+This product includes software developed by Anza, Solana Labs, and the Solana
+program-library contributors (https://github.com/solana-program).
+
+patches/remote-wallet-trezor/ is a redistribution of the crate
+`solana-remote-wallet` version 4.0.0 (Apache-2.0), obtained from crates.io:
+https://crates.io/crates/solana-remote-wallet
+
+Changes made relative to the 4.0.0 release (these are the ONLY changes):
+1. Cargo.toml: package version 4.0.0 -> 3.1.14
+   (so the patched crate satisfies the stock spl-token-cli 5.6.1 requirement)
+2. Cargo.toml: solana-pubkey dependency requirement "~4.1.0" -> "3.0.0"
+   (relaxed to coexist with the CLI's pinned dependency set)
+All files under src/ are byte-identical to the upstream 4.0.0 release.
+
+The build also uses, unmodified, upstream software:
+- spl-token-cli / Token-2022 (Apache-2.0): https://github.com/solana-program/token-2022
+- Solana Agave CLI (solana-keygen): https://github.com/anza-xyz/agave
+- trezor-client (MIT): https://crates.io/crates/trezor-client
+- Rust toolchain and the crates.io ecosystem at their upstream versions
+
+Original licenses remain the property of their respective holders.

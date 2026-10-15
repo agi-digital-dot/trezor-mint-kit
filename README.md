@@ -123,4 +123,17 @@ spl-token set-transfer-fee 3e2PYneVBXTyemNiSQ5VVkuYM4bYNPxLqvWkKjA5zXAM 193 6433
 - The graft only relaxes a version requirement (`solana-pubkey ~4.1.0 → 3.0.0`); no crypto code was modified. Audit diff: `diff -r patches/remote-wallet-trezor/src <(crates.io 4.0.0 sources)` — only `Cargo.toml` differs.
 
 ---
-*Protocol by Robert Shields Jr. McDougall + ECHO Master Control — Oct 15 2026.*
+*Protocol by Lord of Bits + ECHO Ultra - Master Control — Oct 15 2026.*
+
+
+## Credits & licenses
+
+Built on the shoulders of the Solana ecosystem — we gratefully use their software:
+
+- **Anza + Solana Labs + solana-program contributors** — the `spl-token` CLI, Token-2022 program,
+  and `solana-remote-wallet` library (Apache-2.0). The graft in `patches/` redistributes their
+  code under the same license — see [NOTICE](NOTICE) for exact changes.
+- **Trezor / Satoshilabs** — the hardware this whole protocol exists for; `trezor-client` (MIT).
+- **The Rust + crates.io ecosystem** — the toolchain that made the rebuild possible.
+
+This kit's own scripts (build.sh, test-runbook.sh, docs) are MIT — do what you like.
