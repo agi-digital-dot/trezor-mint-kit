@@ -47,6 +47,16 @@ git checkout -q "$COMMIT"
 
 step "3/6 Restoring proven lockfile (kills dependency drift)"
 git show HEAD:Cargo.lock > Cargo.lock
+
+# INTEGRITY GATE: the graft must match the pinned upstream 4.0.0 sources exactly.
+# (Any mismatch = tampered patch tree = the binary would sign with modified wallet code.)
+if ! (cd "$KIT" && sha256sum -c patches/SHA256SUMS --quiet); then
+  echo "FAIL: patches/remote-wallet-trezor/src does not match pinned hashes (patches/SHA256SUMS)."
+  echo "      The graft must be byte-identical to crates.io solana-remote-wallet 4.0.0 src/."
+  exit 1
+fi
+echo "Graft integrity: PASS (byte-identical to upstream 4.0.0 src)"
+
 cp "$KIT/patches/remote-wallet-trezor" ./remote-wallet-trezor.tmp -r 2>/dev/null || cp -r "$KIT/patches/remote-wallet-trezor" ./remote-wallet-trezor
 [ -d ./remote-wallet-trezor ] || { mv ./remote-wallet-trezor.tmp ./remote-wallet-trezor; }
 rm -rf ./remote-wallet-trezor.tmp

@@ -1,0 +1,10 @@
+# Graft source integrity — sha256 of patches/remote-wallet-trezor/src/
+# These files are byte-identical to crates.io solana-remote-wallet 4.0.0 src/
+# (verified by direct diff, Oct 15 2026 — see NOTICE). Any mismatch = DO NOT BUILD.
+71a0b93e2abc9f2809bbd872151e542d440aa915cb2c4754605599035187d470  patches/remote-wallet-trezor/src/ledger_error.rs
+3bc94ded132e1fb1c787540c3cf2b5b6f22a6af7579c17886ccdaa10dfaa7b21  patches/remote-wallet-trezor/src/ledger.rs
+40d113ae79880add42d5db541108c95a1d71fa107e8c68ab8416cb2c34fe5edd  patches/remote-wallet-trezor/src/lib.rs
+658a77764d50f21b619a2da64d6d2e64bd732f7ed9e215bd39f35fa95d9aff64  patches/remote-wallet-trezor/src/locator.rs
+abcb08f158f925dd1005dfcd81ec2c41f5377fa7e43d7bdfdf049703ac300ae7  patches/remote-wallet-trezor/src/remote_keypair.rs
+21973e27ccd8b4bb0f01ca12362977cd918ef85bb7a0ee2a9638efcbfd88cde4  patches/remote-wallet-trezor/src/remote_wallet.rs
+8c6a69305d7cc5031478eaf96a682c00949f1c8f0aaa9f5a6c7a04c8fe42fa0d  patches/remote-wallet-trezor/src/trezor.rs
