@@ -122,13 +122,16 @@ source "$HOME/.profile"
 
 ## Step 6 — Plug in your Trezor (1 min)
 
-1. Plug the **Trezor Model T** into a USB port.
+1. Plug the **Trezor Model T** into a USB port and **unlock it** (enter your PIN — the tools
+   can't talk to a locked device).
 2. If Trezor Suite is open, **close it** (it hogs the device).
-3. Install the little bridge program that lets your computer talk to the Trezor:
+3. Install the USB permission rules for Trezor:
 
 ```bash
-sudo apt install -y trezord   # or download from trezor.io/start
+sudo apt install -y trezor-udev
 ```
+
+(No bridge needed — Solana's tools talk to the Trezor directly over USB.)
 
 ✅ **Check — the moment of truth.** Ask the device for its address:
 
@@ -167,7 +170,7 @@ Then name it, mint your supply, renounce — the full ceremony is in the main
 | `rustc 1.9x is not supported` | wrong Rust version | `rustup default 1.93.0` |
 | `Trezor symbols: 0` | something replaced the graft | re-clone and re-run; the gate refused to install a bad build |
 | `not a manufacturer` | you ran the STOCK spl-token, not the rebuilt one | `which spl-token` must show `~/.cargo/bin/spl-token` |
-| Trezor never asks to confirm | Trezor Suite open, or bridge down | close Suite, `sudo systemctl restart trezord`, replug |
+| Trezor never asks to confirm / command hangs | device locked, or Suite hogging USB | unlock the device (PIN), close Suite, replug |
 | `BlockhashNotFound` after confirming too slowly | tx expired mid-confirm | check if it landed first (Solscan), then just re-run |
 
 ---
