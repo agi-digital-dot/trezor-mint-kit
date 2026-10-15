@@ -75,6 +75,35 @@ spl-token authorize <MINT> freeze --disable
 | `account already in use` | A positional arg collided with an existing account | Don't pass a positional to `create-token`; payer comes from config |
 | `protocol error: Unknown error` | Trezor Suite open / bridge hiccup | Close Suite, replug, retry `solana-keygen pubkey` |
 
+## Phase C — name it, mint supply, verify (mainnet, Trezor signs)
+
+> One step per command. Trezor confirms each on its screen. Mint: `3e2PYneVBXTyemNiSQ5VVkuYM4bYNPxLqvWkKjA5zXAM`
+
+```bash
+# C1. Name it (URI = your hosted metadata JSON — see metadata/token.json)
+spl-token initialize-metadata 3e2PYneVBXTyemNiSQ5VVkuYM4bYNPxLqvWkKjA5zXAM "TDI" "TDI" <YOUR_URI>
+
+# C2. Mint the full supply to your Trezor address
+spl-token mint 3e2PYneVBXTyemNiSQ5VVkuYM4bYNPxLqvWkKjA5zXAM 333333 --recipient DbJ5opgLXjpHkB4STqiJqJMvnVfhE8Pas4aKymzZPe7W
+
+# C3. Prove it (read-only, no signature)
+spl-token supply 3e2PYneVBXTyemNiSQ5VVkuYM4bYNPxLqvWkKjA5zXAM
+# expect: 333333
+solana-keygen pubkey usb://trezor?key=0/0
+# expect: DbJ5opgLXjpHkB4STqiJqJMvnVfhE8Pas4aKymzZPe7W
+```
+
+### Fee-cap note (audit finding, Oct 15)
+On-chain `maximumFee` = 6,433,326,900,000,000 raw = **6,433,326.9 TDI** — the create command's
+`--transfer-fee-maximum-fee` value was parsed as a UI amount and ×10^6 by decimals. Impact: none at
+193 bps (the cap only binds above 3.33M TDI transferred in one tx — more than the entire supply),
+fee charged is always exactly 1.93%. Fix if you want it exact, one Trezor-signed command:
+
+```bash
+spl-token set-transfer-fee 3e2PYneVBXTyemNiSQ5VVkuYM4bYNPxLqvWkKjA5zXAM 193 6433326900000000
+```
+(the raw-integer form — same numbers the RPC now shows — re-signs the cap at the on-chain truth).
+
 ## Provenance
 
 - Upstream repo: `solana-program/token-2022` @ `7a23d8c3` (Oct 2026)
