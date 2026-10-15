@@ -17,6 +17,12 @@ a **Trezor** hardware wallet. The normal version can't — it literally errors w
 
 > No Trezor needed until Step 7. You can build everything first, device still in its box.
 
+> **Don't want to build anything?** Every push to this repo auto-builds the binary on GitHub's
+> servers — grab `spl-token-trezor-linux-x86_64` from the
+> [Actions tab](https://github.com/agi-digital-dot/trezor-mint-kit/actions) (click the latest run →
+> Artifacts). Same integrity gate. Building it yourself is still the trust-maximal path —
+> and it's this guide.
+
 ---
 
 ## Step 1 — Install the two tools the build needs (2 min)
@@ -26,7 +32,7 @@ Open a terminal (`Ctrl+Alt+T`) and paste this, press Enter, type your password w
 ```bash
 curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh -s -- -y --default-toolchain 1.93.0
 source "$HOME/.cargo/env"
-sudo apt update && sudo apt install -y git python3 binutils
+sudo apt update && sudo apt install -y git python3 binutils libudev-dev pkg-config
 ```
 
 **What that did:** Rust is the programming language the Solana tools are written in.

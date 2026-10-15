@@ -25,6 +25,9 @@ jobs:
           key: spl-token-${{ runner.os }}-${{ hashFiles('patches/SHA256SUMS') }}
           restore-keys: spl-token-${{ runner.os }}-
 
+      - name: Install build deps (libudev for hidapi, pkg-config)
+        run: sudo apt-get update && sudo apt-get install -y libudev-dev pkg-config binutils
+
       - name: Build (the same script from TUTORIAL.md)
         run: |
           chmod +x build.sh

@@ -38,6 +38,20 @@ chmod +x build.sh
 
 Requirements: Ubuntu/Debian, `rustup`, `git`, `python3`, `strings` (binutils). Trezor not needed until mint time.
 
+## No build? Grab the CI binary
+
+Every push triggers a GitHub Actions build. Download the artifact
+**`spl-token-trezor-linux-x86_64`** from the [Actions tab](https://github.com/agi-digital-dot/trezor-mint-kit/actions) —
+same integrity gate, same verify step (the build fails if the Trezor symbol count is 0).
+
+```bash
+chmod +x spl-token
+./spl-token --version
+strings ./spl-token | grep -c -i trezor   # must be > 0
+```
+
+Prefer building it yourself? That's the point — [TUTORIAL.md](TUTORIAL.md), 15 minutes.
+
 ## Mint ceremony (you action everything; keys never leave the device)
 
 ```bash
