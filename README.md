@@ -52,7 +52,7 @@ spl-token --program-2022 create-token \
   --transfer-fee-maximum-fee <MAX_FEE>   # example: 100 bps = 1% fee on transfers
 
 # 4. Name it (URI = your hosted metadata JSON):
-spl-token initialize-metadata <MINT> <NAME> <SYMBOL> <YOUR_URI>
+spl-token initialize-metadata <MINT> <NAME> <SYMBOL> https://srv1537297.hstgr.cloud/tdi/token.json
 
 # 5. Mint supply to the Trezor address:
 spl-token mint <MINT> <SUPPLY>
@@ -81,7 +81,7 @@ spl-token authorize <MINT> freeze --disable
 
 ```bash
 # C1. Name it (URI = your hosted metadata JSON — see metadata/token.json)
-spl-token initialize-metadata 3e2PYneVBXTyemNiSQ5VVkuYM4bYNPxLqvWkKjA5zXAM "TDI" "TDI" <YOUR_URI>
+spl-token initialize-metadata 3e2PYneVBXTyemNiSQ5VVkuYM4bYNPxLqvWkKjA5zXAM "TDI" "TDI" https://srv1537297.hstgr.cloud/tdi/token.json
 
 # C2. Mint the full supply to your Trezor address
 spl-token mint 3e2PYneVBXTyemNiSQ5VVkuYM4bYNPxLqvWkKjA5zXAM 333333 --recipient DbJ5opgLXjpHkB4STqiJqJMvnVfhE8Pas4aKymzZPe7W
