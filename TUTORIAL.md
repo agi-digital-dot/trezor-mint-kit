@@ -38,7 +38,7 @@ sudo apt update && sudo apt install -y git python3 binutils libudev-dev pkg-conf
 **What that did:** Rust is the programming language the Solana tools are written in.
 `rustup` installs it. Git downloads source code. `python3` and `binutils` help the build script.
 
-✅ **Check it worked:** paste `rustc --version` — you should see `rustc 1.93.0`.
+ **Check it worked:** paste `rustc --version` — you should see `rustc 1.93.0`.
 
 ![step 1](tutorial/01-rust-version.png)
 
@@ -52,7 +52,7 @@ git clone https://github.com/agi-digital-dot/trezor-mint-kit.git
 cd trezor-mint-kit
 ```
 
-✅ **Check:** `ls` shows `build.sh`, `patches/`, `README.md` and a few more.
+ **Check:** `ls` shows `build.sh`, `patches/`, `README.md` and a few more.
 
 ![step 2](tutorial/02-clone.png)
 
@@ -68,16 +68,16 @@ chmod +x build.sh
 The script does 6 things, and tells you as it goes:
 
 ```
-1/6 Toolchain check            ← makes sure Rust is the right version
-2/6 Fetching official repo     ← downloads Solana's real token-2022 code (pinned commit)
-3/6 Restoring proven lockfile  ← freezes every dependency to known-good versions
-   Graft integrity: PASS      ← math-checks the Trezor module hasn't been tampered with
-4/6 Locking dependencies       ← swaps in the Trezor-capable wallet library
-5/6 Building spl-token         ← ~5-10 minutes of compiling. Go get a drink.
-6/6 VERIFY                     ← counts Trezor code inside the finished binary
+1/6 Toolchain check ← makes sure Rust is the right version
+2/6 Fetching official repo ← downloads Solana's real token-2022 code (pinned commit)
+3/6 Restoring proven lockfile ← freezes every dependency to known-good versions
+   Graft integrity: PASS ← math-checks the Trezor module hasn't been tampered with
+4/6 Locking dependencies ← swaps in the Trezor-capable wallet library
+5/6 Building spl-token ← ~5-10 minutes of compiling. Go get a drink.
+6/6 VERIFY ← counts Trezor code inside the finished binary
 ```
 
-✅ **Check:** near the end you MUST see:
+ **Check:** near the end you MUST see:
 
 ```
 Trezor symbols in new binary: 219
@@ -114,7 +114,7 @@ sh -c "$(curl -sSfL https://release.anza.xyz/stable/install)"
 source "$HOME/.profile"
 ```
 
-✅ **Check:** `solana --version` prints something like `solana-cli 2.x`.
+ **Check:** `solana --version` prints something like `solana-cli 2.x`.
 
 ![step 5](tutorial/05-solana-version.png)
 
@@ -133,7 +133,7 @@ sudo apt install -y trezor-udev
 
 (No bridge needed — Solana's tools talk to the Trezor directly over USB.)
 
-✅ **Check — the moment of truth.** Ask the device for its address:
+ **Check — the moment of truth.** Ask the device for its address:
 
 ```bash
 solana-keygen pubkey usb://trezor?key=0/0

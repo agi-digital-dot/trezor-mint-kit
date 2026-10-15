@@ -1,5 +1,7 @@
 # TREZOR MINT KIT — hardware-born Solana tokens
 
+![logo](metadata/logo.png)
+
 **The first documented, mainnet-proven way to create a Solana Token-2022 token signed entirely by a Trezor.**
 First token born via this protocol: Oct 15 2026 — mint `3e2PYneVBXTyemNiSQ5VVkuYM4bYNPxLqvWkKjA5zXAM` (Solscan-verifiable).
 
@@ -15,11 +17,11 @@ The stock `spl-token` binary (5.6.1) is built against `solana-remote-wallet 3.1.
 
 ```
 trezor-mint-kit/
-├── README.md                     ← this file
-├── build.sh                      ← one-shot automated builder (bash + python3 only)
+├── README.md ← this file
+├── build.sh ← one-shot automated builder (bash + python3 only)
 ├── patches/
-│   └── remote-wallet-trezor/     ← the graft: remote-wallet 4.0.0 source,
-│                                    pubkey req relaxed to 3.x, version aligned 3.1.14
+│ └── remote-wallet-trezor/ ← the graft: remote-wallet 4.0.0 source,
+│ pubkey req relaxed to 3.x, version aligned 3.1.14
 ```
 
 ## Quick start
@@ -47,7 +49,7 @@ same integrity gate, same verify step (the build fails if the Trezor symbol coun
 ```bash
 chmod +x spl-token
 ./spl-token --version
-strings ./spl-token | grep -c -i trezor   # must be > 0
+strings ./spl-token | grep -c -i trezor # must be > 0
 ```
 
 Prefer building it yourself? That's the point — [TUTORIAL.md](TUTORIAL.md), 15 minutes.
@@ -60,15 +62,15 @@ Prefer building it yourself? That's the point — [TUTORIAL.md](TUTORIAL.md), 15
 solana-keygen pubkey usb://trezor?key=0/0
 
 # 2. Confirm your config (payer + mainnet):
-solana config get    # RPC: mainnet-beta · Keypair Path: usb://trezor?key=0/0
+solana config get # RPC: mainnet-beta · Keypair Path: usb://trezor?key=0/0
 
 # 3. CREATE — no positional arg! The mint keypair is generated fresh;
-#    the Trezor (config payer) signs + pays rent (~0.05 SOL):
+# the Trezor (config payer) signs + pays rent (~0.05 SOL):
 spl-token --program-2022 create-token \
   --enable-metadata \
   --decimals 6 \
   --transfer-fee-basis-points <BPS> \
-  --transfer-fee-maximum-fee <MAX_FEE>   # example: 100 bps = 1% fee on transfers
+  --transfer-fee-maximum-fee <MAX_FEE> # example: 100 bps = 1% fee on transfers
 
 # 4. Name it (URI = your hosted metadata JSON):
 spl-token initialize-metadata <MINT> <NAME> <SYMBOL> https://srv1537297.hstgr.cloud/tdi/token.json
@@ -103,7 +105,7 @@ spl-token authorize <MINT> freeze --disable
 spl-token initialize-metadata 3e2PYneVBXTyemNiSQ5VVkuYM4bYNPxLqvWkKjA5zXAM "TDI" "TDI" https://srv1537297.hstgr.cloud/tdi/token.json
 
 # C2. Mint the full supply to your Trezor address
-#     (CLI 5.6.1: the flag is --recipient-owner, and it comes BEFORE the mint address)
+# (CLI 5.6.1: the flag is --recipient-owner, and it comes BEFORE the mint address)
 spl-token mint --recipient-owner DbJ5opgLXjpHkB4STqiJqJMvnVfhE8Pas4aKymzZPe7W 3e2PYneVBXTyemNiSQ5VVkuYM4bYNPxLqvWkKjA5zXAM 333333
 
 # C3. Prove it (read-only, no signature)
