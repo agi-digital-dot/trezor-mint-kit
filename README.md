@@ -20,7 +20,6 @@ trezor-mint-kit/
 ├── patches/
 │   └── remote-wallet-trezor/     ← the graft: remote-wallet 4.0.0 source,
 │                                    pubkey req relaxed to 3.x, version aligned 3.1.14
-└── VC-BRIEF.md                   ← 3-page sellable workflow brief
 ```
 
 ## Quick start
