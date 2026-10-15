@@ -52,5 +52,13 @@ print(int(i['supply'])/10**6, i['decimals'], i.get('mintAuthority') or 'None', i
 [ "$FREEZE" = "None" ] && ok "freeze authority absent" || bad "freeze authority appeared: $FREEZE"
 
 echo
+echo "== 5. Public proof pack (bug class: dead screenshot URLs / non-runnable proof) =="
+[ -x "$HOME/tdi-provenance/proof.sh" ] && ok "proof.sh is executable" || bad "proof.sh lost exec bit"
+for f in 01-supply 02-device-key 03-authority-match 04-five-year-gap 05-binary-proof 06-genesis 07-solscan; do
+  CODE=$(curl -s -o /dev/null -w '%{http_code}' --max-time 20 "https://raw.githubusercontent.com/agi-digital-dot/tdi-true-digital/main/screenshots/$f.png")
+  [ "$CODE" = "200" ] && ok "$f.png live" || bad "$f.png HTTP $CODE"
+done
+
+echo
 echo "RESULT: $PASS passed, $FAIL failed"
 [ "$FAIL" -eq 0 ]
