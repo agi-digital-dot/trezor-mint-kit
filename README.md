@@ -30,6 +30,8 @@ chmod +x build.sh
 ./build.sh
 ```
 
+**New here? Follow the [15-minute picture guide](TUTORIAL.md) — every step, every check, screenshots for each.**
+
 - Takes ~10 min (clone + rust toolchain + release build)
 - Verifies itself: **fails loudly if the built binary has 0 Trezor symbols**
 - Installs to `~/.cargo/bin/spl-token` and symlinks it over the solana install dir copy (old binary saved as `spl-token.old`)
