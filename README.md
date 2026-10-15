@@ -1,6 +1,6 @@
 # TREZOR MINT KIT — hardware-born Solana tokens
 
-![logo](metadata/logo.png)
+![logo](https://raw.githubusercontent.com/agi-digital-dot/agi-digital-dot/main/logo.png)
 
 **The first documented, mainnet-proven way to create a Solana Token-2022 token signed entirely by a Trezor.**
 First token born via this protocol: Oct 15 2026 — mint `3e2PYneVBXTyemNiSQ5VVkuYM4bYNPxLqvWkKjA5zXAM` (Solscan-verifiable).
