@@ -144,6 +144,49 @@ spl-token set-transfer-fee 3e2PYneVBXTyemNiSQ5VVkuYM4bYNPxLqvWkKjA5zXAM 193 6433
 *Protocol by Lord of Bits + ECHO Ultra - Master Control — Oct 15 2026.*
 
 
+
+## The exact two changes
+
+The entire fix is two version strings in one `Cargo.toml` (the graft copy of
+`solana-remote-wallet 4.0.0` — the Trezor-capable release the stock CLI can't reach):
+
+| Line | Upstream 4.0.0 | This kit | Why |
+|---|---|---|---|
+| package version | `version = "4.0.0"` | `version = "3.1.14"` | the CLI requires `^3.1` — the patch only applies at 3.1.x |
+| dependency `solana-pubkey` | `version = "~4.1.0"` | `version = "3.0.0"` | relax to coexist with the CLI's pinned 3.x dependency train |
+
+Nothing else. All Rust source under `patches/remote-wallet-trezor/src/` is byte-identical to
+crates.io 4.0.0 — enforced at build time by `patches/SHA256SUMS`.
+
+The mechanism (done by `build.sh`, not by hand):
+
+1. splice the `solana-remote-wallet` entry out of the upstream `Cargo.lock` (so cargo re-resolves it)
+2. add to the workspace `Cargo.toml`:
+   ```toml
+   [patch.crates-io]
+   solana-remote-wallet = { path = "remote-wallet-trezor" }
+   ```
+
+Verify the diff yourself:
+
+```bash
+# 1. sources identical to upstream?
+cd trezor-mint-kit && sha256sum -c patches/SHA256SUMS
+
+# 2. the only Cargo.toml differences (expect exactly the two lines above):
+curl -sL https://crates.io/api/v1/crates/solana-remote-wallet/4.0.0/download -o rw.crate
+tar xzf rw.crate
+diff solana-remote-wallet-4.0.0/Cargo.toml patches/remote-wallet-trezor/Cargo.toml
+
+# 3. the binary actually changed:
+strings ~/.cargo/bin/spl-token | grep -c -i trezor   # >0 (we get 219; stock = 0)
+```
+
+*Upstream maintainers: everything needed to restore Trezor support in the stock CLI is the
+dep-train above — the 4.x wallet crate is source-compatible with the CLI once the version
+requirements are aligned. A proper fix would move the CLI to the 4.x train or backport
+`trezor.rs` to 3.1.x. This kit exists until then.*
+
 ## Credits & licenses
 
 Built on the shoulders of the Solana ecosystem — we gratefully use their software:
