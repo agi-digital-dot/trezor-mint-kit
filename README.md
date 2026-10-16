@@ -9,6 +9,16 @@ First token born via this protocol: Oct 15 2026 — mint `3e2PYneVBXTyemNiSQ5VVk
 > token ever" (Ledger-signed creations long predate this). Full basis + citations:
 > [tdi-true-digital/CLAIM-BASIS.md](https://github.com/agi-digital-dot/tdi-true-digital/blob/main/CLAIM-BASIS.md).
 
+## The entire fix, at a glance
+
+![the two lines](proof/the-two-lines.png)
+
+![verify it yourself](proof/verify-yourself.png)
+
+The rest of this repo exists to make those two lines build, prove they're safe
+(`patches/SHA256SUMS`), and document the ceremony around them.
+
+
 ## Why this kit exists
 
 The stock `spl-token` binary (5.6.1) is built against `solana-remote-wallet 3.1.x`, a library version with the **Trezor code deleted**. Any `usb://trezor` path fails with `not a manufacturer`. Upstream ships no fix (the 4.x library that restored Trezor is incompatible with the CLI's dependency train). This kit grafts the Trezor module back in — no forks, no vendoring, reproducible.
